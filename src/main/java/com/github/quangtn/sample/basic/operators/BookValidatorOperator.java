@@ -22,8 +22,7 @@ public final class BookValidatorOperator extends ProcessFunction<Book, Book> imp
     }
 
     @Override
-    public void processElement(Book book, ProcessFunction<Book, Book>).Context context,
-                        Collector<Book> collector) {
+    public void processElement(Book book, ProcessFunction<Book, Book>.Context context, Collector<Book> collector) {
             // asin is required to be able to uniquely track the record
         if(book.asin == null || book.asin.isEmpty()) {
             return;

@@ -33,7 +33,7 @@ public class Book {
     public BigDecimal initialPrice;
     public String itemWeight;
     public String manufacturer;
-    public String modeNumber;
+    public String modelNumber;
     public boolean plusContent;
     public String productDimensions;
     public String rating;
