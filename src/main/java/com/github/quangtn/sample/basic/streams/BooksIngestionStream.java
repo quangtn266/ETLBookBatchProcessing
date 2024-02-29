@@ -70,7 +70,7 @@ public final class BooksIngestionStream implements Consumer<StreamExecutionEnvir
                                 Optional.ofNullable(params.get("db-url")).orElse(
                                         "jdbc:postgresql://localhost:5432/books?user=postgres"
                                 )
-                        ).withDriverName("org.postgresl.Driver").build();
+                        ).withDriverName("org.postgresql.Driver").build();
 
                 execution = JdbcExecutionOptions.builder().withBatchSize(100).withBatchIntervalMs(200)
                         .withMaxRetries(5).build();
