@@ -80,7 +80,7 @@ public class BookJdbcSink implements Function<DataStream<Book>, DataStreamSink<B
                         " asin, isbn, answered_questions, availability, brand," +
                         " currency, date_first_available, delivery, description," +
                         " discount, domain, features, final_price, formats, image_url," +
-                        " images_count, initial_price, item_weight, manafacturer," +
+                        " images_count, initial_price, item_weight, manufacturer," +
                         " model_number, plus_content, product_dimensions, rating," +
                         " reviews_count, root_bs_rank, seller_id, seller_name, timestamp," +
                         " title, url, video, video_count, categories, best_sellers_rank" +
@@ -119,7 +119,7 @@ public class BookJdbcSink implements Function<DataStream<Book>, DataStreamSink<B
                         " video = excluded.video," +
                         " video_count = excluded.video_count," +
                         " categories = excluded.categories," +
-                        " best_sellers_rank = excluded.best_seller_rank::jsonb",
+                        " best_sellers_rank = excluded.best_sellers_rank::jsonb",
                         BookJdbcSink::accept,
                         executionOptions,
                         connectionOptions

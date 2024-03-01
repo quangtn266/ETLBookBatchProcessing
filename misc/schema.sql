@@ -1,7 +1,7 @@
 create table book (
     asin varchar not null,
     isbn varchar,
-    answered_question int,
+    answered_questions int,
     availability varchar,
     brand varchar,
     currency varchar,
@@ -32,7 +32,7 @@ create table book (
     video boolean,
     video_count int,
     categories varchar[],
-    best_seller_rank jsonb,
+    best_sellers_rank jsonb,
     primary key (asin)
 );
 
@@ -77,7 +77,7 @@ create table book_ingestion (
     ingestion_log_entry_id int,
     asin varchar not null,
     isbn varchar,
-    answered_question int,
+    answered_questions int,
     availability varchar,
     brand varchar,
     currency varchar,
@@ -108,7 +108,7 @@ create table book_ingestion (
     video boolean,
     video_count int,
     categories varchar[],
-    best_seller_rank jsonb,
+    best_sellers_rank jsonb,
     primary key (ingestion_log_entry_id, asin),
     foreign key (ingestion_log_entry_id) references ingestion_log_entry (id)
 );
