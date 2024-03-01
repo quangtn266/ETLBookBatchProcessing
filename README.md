@@ -37,8 +37,20 @@ mvn clean package
 ```
 
 # Running.
+
+1. Start flink cluster.
+```
+./bin/flink/start-cluster.sh
+```
+
+2. Running flink.
 ```
 ../flink-1.18.1/bin/flink run -p 4 ./target/github-etl-datapipeline-1.0-SNAPSHOT.jar --input-dir dataset.json ./ --db-url jdbc:postgresql://localhost:5432/books
+```
+
+3. Stop flink.
+```
+./bin/stop-cluster.sh
 ```
 
 # Output.
