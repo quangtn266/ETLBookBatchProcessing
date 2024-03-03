@@ -1,6 +1,7 @@
 package com.github.quangtn.sample.advanced.operators;
 
 import com.github.quangtn.sample.advanced.domain.IngestionSource;
+import com.github.quangtn.sample.basic.domain.Book;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;

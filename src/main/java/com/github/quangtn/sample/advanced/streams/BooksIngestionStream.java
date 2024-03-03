@@ -1,5 +1,6 @@
 package com.github.quangtn.sample.advanced.streams;
 
+import com.github.quangtn.sample.basic.operators.BookValidatorOperator;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.connector.jdbc.JdbcExecutionOptions;
@@ -15,6 +16,7 @@ import com.github.quangtn.sample.advanced.operators.ReadTextLineOperator;
 import com.github.quangtn.sample.advanced.sinks.BookIngestionJdbcSink;
 import com.github.quangtn.sample.advanced.sources.BookDataStreamSource;
 import com.github.quangtn.sample.basic.domain.Book;
+
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -43,6 +45,7 @@ public class BooksIngestionStream implements Consumer<StreamExecutionEnvironment
                 .andThen(new BookJsonDeserializerOperator())
                 .apply(source);
     }
+
 
     public static class Options {
         public final Path inputDir;

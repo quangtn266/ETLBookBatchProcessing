@@ -8,7 +8,6 @@ import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
-import org.apache.flink.util.Preconditions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import retry.ExpBackoff;
@@ -54,7 +53,7 @@ public final class AddIngestionLogEntryJdbcOperator
                     PreparedStatement preparedStatement = getPreparedStatement();
                     preparedStatement.setString(1, path.getPath());
                     try (ResultSet rs = preparedStatement.executeQuery()) {
-                        Preconditions.checkArgument(rs.next());
+                       // Preconditions.checkArgument(rs.next());
                         return new IngestionSource<>(rs.getInt(1), path);
                     }
                 },
@@ -81,13 +80,12 @@ public final class AddIngestionLogEntryJdbcOperator
         }
     }
 
-    private PreparedStatement getPreparedStatement() throw SQLException {
+    private PreparedStatement getPreparedStatement() throws SQLException {
         if(preparedStatementCommand == null) {
             preparedStatementCommand = new PreparedStatementCommand(
                     "INSERT INTO ingestion_log_entry (path, status_id)" +
-                            "VALUES (?, 20) RETURNING id", options
-                );
-            }
+                            "VALUES (?, 20) RETURNING id", options);
+        }
         return preparedStatementCommand.getPreparedStatement();
     }
 }
