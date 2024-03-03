@@ -9,7 +9,12 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import com.github.quangtn.sample.advanced.domain.IngestionSource;
-import com.github.quangtn.sample.advanced.operators.;
+import com.github.quangtn.sample.advanced.operators.AddIngestionLogEntryJdbcOperator;
+import com.github.quangtn.sample.advanced.operators.BookJsonDeserializerOperator;
+import com.github.quangtn.sample.advanced.operators.ReadTextLineOperator;
+import com.github.quangtn.sample.advanced.sinks.BookIngestionJdbcSink;
+import com.github.quangtn.sample.advanced.sources.BookDataStreamSource;
+import com.github.quangtn.sample.basic.domain.Book;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -26,16 +31,17 @@ public class BooksIngestionStream implements Consumer<StreamExecutionEnvironment
 
     @Override
     public void accept(StreamExecutionEnvironment env) {
-        new BookDataStreamSource(options.inputDir).andThen(new BookIngestionJdbcSink(
+        new BookDataStreamSource(options.inputDir).andThen(this).andThen(new BookIngestionJdbcSink(
                 options.jdbc.execution,
-                options.jdbc.connection
-        )).apply(env);
+                options.jdbc.connection)).apply(env);
     }
 
     @Override
     public SingleOutputStreamOperator<IngestionSource<Book>> apply(DataStreamSource<Path> source) {
-        return new AddIngestionLogEntryJdbcOperator(options.jdbc.connection).andThen(new ReadTextLineOperator())
-                .andThen(new BookJdbcDeserializerOperator()).apply(source);
+        return new AddIngestionLogEntryJdbcOperator(options.jdbc.connection)
+                .andThen(new ReadTextLineOperator())
+                .andThen(new BookJsonDeserializerOperator())
+                .apply(source);
     }
 
     public static class Options {

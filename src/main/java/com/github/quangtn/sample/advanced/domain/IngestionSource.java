@@ -1,6 +1,6 @@
 package com.github.quangtn.sample.advanced.domain;
 
-public class IngestionSource {
+public final class IngestionSource<T> {
 
     public final Integer id;
 
